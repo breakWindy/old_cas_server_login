@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta content="width=device-width, initial-scale=1" name="viewport" />
+        <title>统一安全系统</title>
+        <!-- BEGIN GLOBAL MANDATORY STYLES -->
+        <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css" />
+        <link th:href="@{/themes/authority/css/font-awesome.min.css}" rel="stylesheet" type="text/css" />
+        <link th:href="@{/themes/authority/css/simple-line-icons.min.css}" rel="stylesheet" type="text/css" />
+        <link th:href="@{/themes/authority/css/bootstrap.min.css}" rel="stylesheet" type="text/css" />
+        <link th:href="@{/themes/authority/css/bootstrap-switch.min.css}" rel="stylesheet" type="text/css" />
+        <!-- END GLOBAL MANDATORY STYLES -->
+        <!-- BEGIN THEME GLOBAL STYLES -->
+        <link th:href="@{/themes/authority/css/components.min.css}" rel="stylesheet" id="style_components" type="text/css" />
+        <link th:href="@{/themes/authority/css/plugins.min.css}" rel="stylesheet" type="text/css" />
+        <!-- END THEME GLOBAL STYLES -->
+        <!-- BEGIN PAGE LEVEL STYLES -->
+        <link th:href="@{/themes/authority/css/login.min.css}" rel="stylesheet" type="text/css" />
+        <!-- END PAGE LEVEL STYLES -->
+        <link rel="shortcut icon" th:href="@{/themes/authority/css/favicon.ico}" />
+    </head>
+    <!-- END HEAD -->
+
+    <body class=" login">
+        <div id="particles">
+        <!-- BEGIN LOGO -->
+        <div style="margin-left: 50px; margin-top:20px;">
+              <img th:src="@{/themes/authority/css/logo.png}" alt="" />
+        </div>ROOT
+        <div class="logo" style="font-size:40px; color:#FFF; margin-top:40px;">黔中水利枢纽综合信息化系统</div>
+        <!-- END LOGO -->
+        <!-- BEGIN LOGIN -->
+        <div class="content">
+            <!-- BEGIN LOGIN FORM -->
+            <form method="post" th:object="${credential}">
+                <h3 class="form-title font-green">登 录</h3>
+                <div class="alert alert-danger" th:if="${#fields.hasErrors('*')}">
+                    <span th:each="err : ${#fields.errors('*')}" th:utext="${err}"/>
+                </div>
+                <div class="form-group">
+                    <!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
+                    <label class="control-label visible-ie8 visible-ie9">Username</label>
+                    <input class="form-control form-control-solid placeholder-no-fix"
+                    	   type="text" 
+                    	   placeholder="用户名"
+                    	   name="username" 
+                    	   id="username"
+	                       size="25"
+	                       tabindex="1"
+	                       th:disabled="${guaEnabled}"
+	                       th:field="*{username}"
+	                       th:accesskey="#{screen.welcome.label.netid.accesskey}"
+	                       autocomplete="off"/> </div>
+                <div class="form-group">
+                    <label class="control-label visible-ie8 visible-ie9">Password</label>
+                    <input class="form-control form-control-solid placeholder-no-fix" 
+		                   type="password" 
+		                   placeholder="密码"
+		                   name="password" 
+	                       id="password"
+	                       size="25"
+	                       tabindex="2"
+	                       th:accesskey="#{screen.welcome.label.password.accesskey}"
+	                       th:field="*{password}"
+	                       autocomplete="off"/> </div>
+                <div class="form-actions">
+                	<input type="hidden" name="execution" th:value="${flowExecutionKey}"/>
+		            <input type="hidden" name="_eventId" value="submit"/>
+		            <input type="hidden" name="geolocation"/>
+                    <input type="submit"
+                    		class="btn green uppercase"
+                    		name="submit"
+		                    accesskey="l"
+		                    th:value="#{screen.welcome.button.login}"
+		                    tabindex="6"/>
+                    <label class="rememberme check mt-checkbox mt-checkbox-outline">
+                        <input type="checkbox" name="rememberMe" id="rememberMe" value="true" tabindex="5" />记住密码
+                        <span></span>
+                    </label>
+                </div>
+                <div class="create-account">
+                    <p>
+                        <!-- <a href="javascript:;" id="register-btn" class="uppercase"></a> -->
+                    </p>
+                </div>
+            </form>
+            <!-- END LOGIN FORM -->
+            <!-- BEGIN FORGOT PASSWORD FORM -->
+            <form class="forget-form" action="index.html" method="post">
+                <h3 class="font-green">Forget Password ?</h3>
+                <p> Enter your e-mail address below to reset your password. </p>
+                <div class="form-group">
+                    <input class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="Email" name="email" /> </div>
+                <div class="form-actions">
+                    <button type="button" id="back-btn" class="btn green btn-outline">Back</button>
+                    <button type="submit" class="btn btn-success uppercase pull-right">Submit</button>
+                </div>
+            </form>
+            <!-- END FORGOT PASSWORD FORM -->
+        </div>
+        <div class="copyright"> 2019 © 信通达智能科技有限公司 </div>
+        </div>
+        <!-- BEGIN CORE PLUGINS -->
+        <script th:src="@{/themes/authority/js/jquery.min.js}" type="text/javascript"></script>
+        <script th:src="@{/themes/authority/js/bootstrap.min.js}" type="text/javascript"></script>
+        <script th:src="@{/themes/authority/js/js.cookie.min.js}" type="text/javascript"></script>
+        <!-- <script th:src="@{/themes/authority/js/jquery.slimscroll.min.js}" type="text/javascript"></script>
+        <script th:src="@{/themes/authority/js/jquery.blockui.min.js}" type="text/javascript"></script>
+        <script th:src="@{/themes/authority/js/bootstrap-switch.min.js}" type="text/javascript"></script> -->
+        <!-- END CORE PLUGINS -->
+        <!-- BEGIN PAGE LEVEL PLUGINS -->
+        <!-- <script th:src="@{/themes/authority/js/jquery.validate.min.js}" type="text/javascript"></script>
+        <script th:src="@{/themes/authority/js/additional-methods.min.js}" type="text/javascript"></script> -->
+        <!-- END PAGE LEVEL PLUGINS -->
+        <!-- BEGIN THEME GLOBAL SCRIPTS -->
+        <script th:src="@{/themes/authority/js/app.min.js}" type="text/javascript"></script>
+        <!-- END THEME GLOBAL SCRIPTS -->
+        <!-- BEGIN PAGE LEVEL SCRIPTS -->
+        <!-- <script th:src="@{/themes/authority/js/login.min.js}" type="text/javascript"></script> -->
+        <!-- END PAGE LEVEL SCRIPTS -->
+        <script th:src="@{/themes/authority/js/bg/three.min.js}" type="text/javascript"></script>
+        <script th:src="@{/themes/authority/js/bg/index-canvas.js}" type="text/javascript"></script>
+        <script>
+            /* $(document).ready(function()
+            {
+                $('#clickmewow').click(function()
+                {
+                    $('#radio1003').attr('checked', 'checked');
+                });
+            }) */
+        </script>
+    </body>
+
+</html>

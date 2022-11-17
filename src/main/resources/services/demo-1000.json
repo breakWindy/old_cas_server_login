@@ -1,0 +1,12 @@
+{
+  "@class" : "org.apereo.cas.services.RegexRegisteredService",
+  "serviceId" : "^(https|imaps|http)://.*authority.*",
+  "name" : "demo",
+  "id" : 1000,
+  "description" : "yellowcong项目访问过来，跳转到demo主题",
+  "evaluationOrder" : 100000,
+  "theme": "demo",
+  "attributeReleasePolicy" : {
+    "@class" : "org.apereo.cas.services.ReturnAllAttributeReleasePolicy"
+  }
+}
